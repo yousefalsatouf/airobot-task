@@ -1,0 +1,79 @@
+*
+{
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6
+{
+  font-family: 'Miltonian Tattoo', cursive;
+}
+
+body 
+{ 
+  background-color: #f5f6fa;
+}
+
+.map-header
+{
+  display: flex;
+  justify-content: space-between;
+}
+
+.map-header div
+{
+  flex: 7;
+}
+.map-header a
+{
+  flex: 3;
+  align-items: center;
+  
+}
+
+.content
+{
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.app__left
+{
+  flex: 0.75;
+} 
+
+.app__right
+{
+  flex: 0.2;
+}
+
+.app__right h3
+{
+  text-align: center;
+  margin: 1rem auto
+}
+
+.table
+{
+  padding: 2rem;
+  height: 400px;
+  overflow: scroll;
+}
+
+.app__header
+{
+  padding: 1rem;
+}
+
+.footer
+{
+  padding: 1rem;
+}
+
+@media (max-width: 990px)
+{
+  .content, .map-header
+  {
+    flex-direction: column;
+  }
+}

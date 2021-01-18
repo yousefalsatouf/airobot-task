@@ -1,0 +1,12 @@
+
+.infoBox {
+     flex: 1;
+     cursor: pointer;
+     margin: 10px;
+   }
+
+
+   .flex small
+   {
+    display: block;
+   }
