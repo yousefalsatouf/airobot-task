@@ -29,7 +29,7 @@ app.use('/draws', drawRoute)
 
 
 app.get("/", (req, res) => {
-     res.send("Hello there");
+     res.send("Server running ....");
  });
 
 

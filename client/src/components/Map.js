@@ -5,7 +5,6 @@ import { baseMaps, overlayMaps } from './helpers/LayerController'
 import Button from '@material-ui/core/Button';
 import { Card, CardContent } from "@material-ui/core";  
 import axios from 'axios'
-//import data from './helpers/data.js'
 import 'leaflet-draw'
 import "../css/Map.css"
 import "leaflet/dist/leaflet.css";
@@ -19,9 +18,10 @@ const DrawMap = ({ center, zoom}) => {
   const prettyIcon= require('../imgs/lovely-marker.png')
   const blackIcon= require('../imgs/black-marker.png')
   const icon = L.icon({
-    iconUrl: redIcon,
+    iconUrl: blackIcon,
     iconSize: [50, 50]
   });
+  
   const marker= L.marker(center, {icon: icon, draggable: true})
   const url= 'http://localhost:4000/draws/store'
   // export data
@@ -33,6 +33,7 @@ const DrawMap = ({ center, zoom}) => {
         })
         .then(function (response) {
             //handle success
+            alert('Exported successfully')
             console.log(response);
         })
         .catch(function (err) {
@@ -48,7 +49,7 @@ const DrawMap = ({ center, zoom}) => {
 
      layer.addTo(map);
 
-     marker.bindPopup(`Airobot location on Lat:  ${marker.getLatLng().lat} / Lng: ${ marker.getLatLng().lng}`)
+     marker.bindPopup(`Halito location on Lat:  ${marker.getLatLng().lat} - Lng: ${ marker.getLatLng().lng}`)
      marker.addTo(map)
 
      L.control.layers(baseMaps, overlayMaps).addTo(map)
@@ -64,8 +65,8 @@ const DrawMap = ({ center, zoom}) => {
          }
        },
        draw: {
-         circle: false,
-         circlemarker: false,
+        circlemarker: false,
+        circle: false,
          polygon : {
            allowIntersection: false,
            showArea:true,
@@ -149,7 +150,6 @@ const DrawMap = ({ center, zoom}) => {
         //let exportFileDefaultName = 'export_draw_CREATE.geojson';
         //linkElement.setAttribute('href', dataUri);
         //linkElement.setAttribute('download', exportFileDefaultName);
-
         console.log(JSON.stringify(drawnItems.toGeoJSON()));
         var geoObject = JSON.parse(JSON.stringify(drawnItems.toGeoJSON()))
         var data = geoObject.features[0]
@@ -173,19 +173,15 @@ const DrawMap = ({ center, zoom}) => {
           props.info = content;
         });
         console.log(JSON.stringify(drawnItems.toGeoJSON()));
-        let dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(JSON.stringify(drawnItems.toGeoJSON()));
-        let exportFileDefaultName = 'export_draw_EDIT.geojson';
-        linkElement.setAttribute('href', dataUri);
-        linkElement.setAttribute('download', exportFileDefaultName);
+        var geoObject = JSON.parse(JSON.stringify(drawnItems.toGeoJSON()))
+        var data = geoObject.features[0]
+        linkElement.addEventListener("click", ()=>handelExportGeoJson(data), true)
+        console.log(data);
      });
    
      // Object(s) deleted - update console log
       map.on(L.Draw.Event.DELETED, function(event) {
         console.log(JSON.stringify(drawnItems.toGeoJSON()));
-        let dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(JSON.stringify(drawnItems.toGeoJSON()));
-        let exportFileDefaultName = 'export_draw_DELETE.geojson';
-        linkElement.setAttribute('href', dataUri);
-        linkElement.setAttribute('download', exportFileDefaultName);
      });
 
   }, [center, zoom, icon, layer]);
@@ -197,9 +193,9 @@ const DrawMap = ({ center, zoom}) => {
           <div className="app__header map-header">
               <div>
               <h1>Map</h1>
-              <small>Create some features with drawing tools then export to <strong>GeoJSON</strong> and<strong>mongoDB</strong></small>
+              <small>Create some features with drawing tools then export to <strong>GeoJSON</strong></small>
               </div>
-              <Button id="export" href="#" color="secondary">Export GeoJSON.</Button>
+              <Button id="export" href="#" color="primary">Export GeoJSON.</Button>
           </div>
           <div id="map" className="map" ref={refContainer}></div> 
         </CardContent>

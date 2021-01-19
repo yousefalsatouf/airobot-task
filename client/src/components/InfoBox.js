@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useEffect} from 'react';
+import * as L from "leaflet";
 import { useQuery } from "react-apollo";
 import { gql } from "apollo-boost";
 import Button  from"@material-ui/core/Button"
@@ -32,16 +33,15 @@ const InfoBox = () =>
 {
   const { loading, error, data } = useQuery(GET_LOCATIONS);
 
-
   return (
     <Card className="app__right">
        <div className="app__header">
-          <h1>Airobot Software</h1>
-          <h5>All data imported here</h5>
+          <h1>Draws Software</h1>
+          <h5>All Draws imported here</h5>
         </div>
         <hr/>
         <CardContent className="table">
-            {error?<strong className="red">Error while loading. </strong>:null}
+            {error?<strong className="red">Error while loading, server might be down! </strong>:null}
             {loading? <strong className="primary">Loading ...</strong>:null}
             {data?
               <div>

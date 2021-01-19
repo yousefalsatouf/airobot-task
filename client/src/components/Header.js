@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import MapIcon from '@material-ui/icons/Map';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,7 +24,7 @@ export default function MenuAppBar() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar className={classes.toolbar}>
-          <h1>Airobot</h1>
+          <h1><MapIcon/> Make Draws </h1>
         </Toolbar>
       </AppBar>
     </div>

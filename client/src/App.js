@@ -9,7 +9,7 @@ import './css/App.css';
 
 const App = () =>                 
 {
-  const [mapCenter] = useState({ lat: 50.7955785, lng: 5.2061567 });
+  const [mapCenter] = useState({ lat: 51.242400, lng: 4.419060 });
   const [mapZoom] = useState(8);
   
   const client = new ApolloClient({ uri: 'http://localhost:4000/graphql' });
